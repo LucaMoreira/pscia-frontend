@@ -101,7 +101,7 @@ export const useAudio = () => {
     clearError();
     
     try {
-      const convs = await audioService.loadConversations();
+      const convs = await audioService.getConversations();
       setConversations(convs);
     } catch (error) {
       handleError(error);

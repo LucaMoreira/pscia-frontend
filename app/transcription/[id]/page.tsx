@@ -155,7 +155,7 @@ export default function TranscriptionPage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
         <div className="max-w-4xl mx-auto">
-          <Alert variant="destructive">
+          <Alert severity="error">
             <AlertDescription>{error}</AlertDescription>
           </Alert>
         </div>
@@ -187,8 +187,8 @@ export default function TranscriptionPage() {
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center space-x-4">
             <Button
-              variant="outline"
-              size="sm"
+              variant="outlined"
+              size="small"
               onClick={() => router.back()}
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
@@ -202,14 +202,14 @@ export default function TranscriptionPage() {
           
           <div className="flex space-x-2">
             <Button
-              variant="outline"
+              variant="outlined"
               onClick={() => copyToClipboard(transcription.text)}
             >
               <Copy className="h-4 w-4 mr-2" />
               Copiar
             </Button>
             <Button
-              variant="outline"
+              variant="outlined"
               onClick={downloadTranscription}
             >
               <Download className="h-4 w-4 mr-2" />
@@ -243,12 +243,12 @@ export default function TranscriptionPage() {
               </div>
               
               <div className="flex items-center space-x-2">
-                <Badge variant="outline" className="text-green-600 border-green-600">
+                <Badge variant="outlined" className="text-green-600 border-green-600">
                   <CheckCircle className="h-3 w-3 mr-1" />
                   Concluído
                 </Badge>
                 {transcription.confidence && (
-                  <Badge variant="outline">
+                  <Badge variant="outlined">
                     {Math.round(transcription.confidence * 100)}% confiança
                   </Badge>
                 )}
@@ -268,11 +268,7 @@ export default function TranscriptionPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Textarea
-                  value={transcription.text}
-                  readOnly
-                  className="min-h-[400px] resize-none"
-                />
+                <Textarea />
               </CardContent>
             </Card>
           </div>
@@ -293,7 +289,7 @@ export default function TranscriptionPage() {
               <CardContent className="space-y-2">
                 <Button
                   className="w-full justify-start"
-                  variant="outline"
+                  variant="outlined"
                   onClick={() => runAnalysis('sentiment')}
                   disabled={isAnalyzing}
                 >
@@ -301,7 +297,7 @@ export default function TranscriptionPage() {
                 </Button>
                 <Button
                   className="w-full justify-start"
-                  variant="outline"
+                  variant="outlined"
                   onClick={() => runAnalysis('keywords')}
                   disabled={isAnalyzing}
                 >
@@ -309,7 +305,7 @@ export default function TranscriptionPage() {
                 </Button>
                 <Button
                   className="w-full justify-start"
-                  variant="outline"
+                  variant="outlined"
                   onClick={() => runAnalysis('summary')}
                   disabled={isAnalyzing}
                 >
@@ -317,7 +313,7 @@ export default function TranscriptionPage() {
                 </Button>
                 <Button
                   className="w-full justify-start"
-                  variant="outline"
+                  variant="outlined"
                   onClick={() => runAnalysis('topics')}
                   disabled={isAnalyzing}
                 >
@@ -359,4 +355,5 @@ export default function TranscriptionPage() {
     </div>
   );
 }
+
 

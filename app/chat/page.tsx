@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useAudio } from '@/hooks/useAudio';
 import { useAuth } from '@/hooks/useAuth';
@@ -19,7 +19,7 @@ import {
   Plus
 } from 'lucide-react';
 
-export default function ChatPage() {
+function ChatPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { user, isLoading: authLoading } = useAuth();
@@ -122,7 +122,7 @@ export default function ChatPage() {
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold text-gray-900">Conversas</h2>
               <Button
-                size="sm"
+                size="small"
                 onClick={startNewConversation}
                 className="flex items-center"
               >
@@ -179,8 +179,8 @@ export default function ChatPage() {
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <Button
-                  variant="outline"
-                  size="sm"
+                  variant="outlined"
+                  size="small"
                   onClick={() => router.back()}
                 >
                   <ArrowLeft className="h-4 w-4 mr-2" />
@@ -200,9 +200,8 @@ export default function ChatPage() {
               </div>
               
               {audioFileId && (
-                <Badge variant="outline" className="text-blue-600 border-blue-600">
-                  <FileAudio className="h-3 w-3 mr-1" />
-                  Contexto de áudio
+                <Badge variant="outlined" className="text-blue-600 border-blue-600">
+                  🎵 Contexto de áudio
                 </Badge>
               )}
             </div>
@@ -211,7 +210,7 @@ export default function ChatPage() {
           {/* Messages */}
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
             {error && (
-              <Alert variant="destructive">
+              <Alert severity="error">
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
@@ -295,4 +294,20 @@ export default function ChatPage() {
     </div>
   );
 }
+
+export default function ChatPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-4 text-muted-foreground">Carregando...</p>
+        </div>
+      </div>
+    }>
+      <ChatPageContent />
+    </Suspense>
+  );
+}
+
 

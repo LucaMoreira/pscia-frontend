@@ -108,7 +108,7 @@ export default function UploadPage() {
         </header>
 
         {error && (
-          <Alert variant="destructive" className="mb-6">
+          <Alert severity="error" className="mb-6">
             <AlertDescription>{error}</AlertDescription>
           </Alert>
         )}
@@ -139,7 +139,7 @@ export default function UploadPage() {
                   <p className="text-lg text-gray-600 mb-2">
                     Arraste arquivos de áudio aqui ou clique para selecionar
                   </p>
-                  <Button variant="outline">Selecionar Arquivos</Button>
+                  <Button variant="outlined">Selecionar Arquivos</Button>
                 </div>
               )}
             </div>
@@ -168,7 +168,7 @@ export default function UploadPage() {
               </div>
               <Button 
                 onClick={loadAudioFiles} 
-                variant="outline"
+                variant="outlined"
                 disabled={isLoading}
               >
                 Atualizar
@@ -204,7 +204,7 @@ export default function UploadPage() {
                     
                     <div className="flex items-center space-x-4">
                       <Badge 
-                        variant="outline" 
+                        variant="outlined" 
                         className={`${getStatusColor(file.status)} border-current`}
                       >
                         <div className="flex items-center space-x-1">
@@ -215,7 +215,7 @@ export default function UploadPage() {
                       
                       {file.status === 'completed' && (
                         <Button
-                          size="sm"
+                          size="small"
                           onClick={() => router.push(`/transcription/${file.id}`)}
                         >
                           Ver Transcrição
